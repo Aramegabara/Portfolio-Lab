@@ -61,6 +61,7 @@ main_proj/main_proj/secret_key.py
 
 # DB navigator
 .idea/dbnavigator.xml/
+.idea
 
 # Django stuff:
 *.log
