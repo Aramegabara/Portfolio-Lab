@@ -4,4 +4,4 @@ from django.views.generic import View
 
 class BaseView(View):
     def get(self, request):
-        return render(request, 'main_app/base.html')
+        return render(request, 'main_app/index.html')
