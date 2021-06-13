@@ -1,8 +1,15 @@
 from django.urls import path
 from .views import (
-    BaseView,
-)
+    LandingPage,
+    AddDonation,
+    Login,
+    Register,
+
+    )
 
 urlpatterns = [
-    path('', BaseView.as_view(), name='base')
+    path('', LandingPage.as_view(), name='start'),
+    path('donat/', AddDonation.as_view(), name='donat'),
+    path('login/', Login.as_view(), name='login'),
+    path('registration/', Register.as_view(), name='register'),
 ]
