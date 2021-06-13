@@ -10,9 +10,9 @@ class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Category')
 
 class Institution(models.Model):
-    V1 = 'fundation'
+    V1 = 'foundation'
     V2 = 'organization'
-    V3 = 'collection'
+    V3 = 'local_donation'
 
     TYPE_INSTITUTION = (
         (V1, 'fundacja'),
@@ -32,7 +32,7 @@ class Institution(models.Model):
 class Donation(models.Model):
     quantity = models.PositiveIntegerField(default=1)
     categories = models.ManyToManyField(Category, verbose_name='Categories')
-    institution  = models.ForeignKey('Institution', verbose_name='Institution', on_delete=models.CASCADE)
+    institution = models.ForeignKey(Institution, verbose_name='Institution', on_delete=models.CASCADE)
     address = models.CharField(max_length=200, verbose_name='Address',)
     phone_number = models.CharField(max_length=15, verbose_name='Phone')
     city = models.CharField(max_length=100, verbose_name='City')
