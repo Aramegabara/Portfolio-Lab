@@ -1,14 +1,15 @@
 {% extends 'main_app/base.html' %}
-{% block body %}
+{% block content %}
 <hr>
   <body>
     <header>
+<!--if login-->
       <nav class="container container--70">
         <ul class="nav--actions">
-          <li><a href="#">Zaloguj</a></li>
-          <li class="highlighted"><a href="#">Załóż konto</a></li>
+          <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
+          <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
-
+<!--menu without js-->
         <ul>
           <li><a href="#">Start</a></li>
           <li><a href="#">O co chodzi?</a></li>
@@ -18,7 +19,7 @@
         </ul>
       </nav>
     </header>
-
+<!--LOGIN FORM-->
     <section class="login-page">
       <h2>Zaloguj się</h2>
       <form>
@@ -29,7 +30,7 @@
           <input type="password" name="password" placeholder="Hasło" />
           <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
-
+<!--logo in logo menu-->
         <div class="form-group form-group--buttons">
           <a href="#" class="btn btn--without-border">Załóż konto</a>      
           <button class="btn" type="submit">Zaloguj się</button> 
