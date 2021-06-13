@@ -1,26 +1,10 @@
-{% extends 'main_app/base.html' %}
+{% extends 'main_app/base.html'%}
 {% block content %}
-<hr>
   <body>
-    <header>
-<!--if login-->
-      <nav class="container container--70">
-        <ul class="nav--actions">
-          <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
-          <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
-        </ul>
-<!--menu without js-->
-        <ul>
-          <li><a href="#">Start</a></li>
-          <li><a href="#">O co chodzi?</a></li>
-          <li><a href="#">O nas</a></li>
-          <li><a href="#">Fundacje i organizacje</a></li>
-          <li><a href="#">Kontakt</a></li>
-        </ul>
-      </nav>
-    </header>
+<!--  header without js-->
+
 <!--LOGIN FORM-->
-    <section class="login-page">
+    <section id="log" class="login-page">
       <h2>Zaloguj się</h2>
       <form>
         <div class="form-group">
@@ -32,10 +16,10 @@
         </div>
 <!--logo in logo menu-->
         <div class="form-group form-group--buttons">
-          <a href="#" class="btn btn--without-border">Załóż konto</a>      
+          <a href="{% url 'register' %}#reg" class="btn btn--without-border">Załóż konto</a>
           <button class="btn" type="submit">Zaloguj się</button> 
         </div>
       </form>
     </section>
-
   {% endblock %}
+
