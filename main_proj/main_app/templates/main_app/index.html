@@ -3,7 +3,6 @@
   <body>
 <!--  NAV-->
 <!--LOGIN OR REGISTR & MENU WITH JS-->
-
 <!-- SLOGAN-->
       <div class="slogan container container--90">
         <div class="slogan--item">
@@ -21,19 +20,16 @@
           <h3>Oddanych worków</h3>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum tempora!</p>
         </div>
-
         <div class="stats--item">
           <em>{{ institution }}</em>
           <h3>Wspartych organizacji</h3>
           <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas quam.</p>
         </div>
-
       </div>
     </section>
 <!--STEPS-->
     <section id="steps" class="steps">
       <h2>Wystarczą 4 proste kroki</h2>
-
       <div class="steps--container">
         <div class="steps--item">
           <span class="icon icon--hands"></span>
@@ -71,29 +67,24 @@
 <!--HELP-->
      <section id="help" class="help">
       <h2>Komu pomagamy?</h2>
-
       <ul class="help--buttons">
         <li data-id="1"><a href="#" class="btn btn--without-border active">Fundacjom</a></li>
         <li data-id="2"><a href="#" class="btn btn--without-border">Organizacjom pozarządowym</a></li>
         <li data-id="3"><a href="#" class="btn btn--without-border">Lokalnym zbiórkom</a></li>
       </ul>
-
       <!-- SLIDE 1 -->
       <div class="help--slides active" data-id="1">
         <p>W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy. Możesz sprawdzić czym się zajmują, komu pomagają i czego potrzebują.</p>
-
         <ul class="help--slides-items">
-
-          {% for i in foundation_1 %}
+{% for i in foundation_1 %}
           <li>
             <div class="col">
               <div class="title">Fundacja “{{ i.name }}”</div>
               <div class="subtitle">Cel i misja: {{ i.description }}.</div>
             </div>
-
             <div class="col"><div class="text"> categories </div></div>
           </li>
-          {% endfor %}
+{% endfor %}
         </ul>
 <!--         Pagination-->
 <!--        <ul class="help&#45;&#45;slides-pagination">-->
@@ -101,10 +92,7 @@
 <!--          <li><a href="#" class="btn btn&#45;&#45;small btn&#45;&#45;without-border" data-page="2">2</a></li>-->
 <!--          <li><a href="#" class="btn btn&#45;&#45;small btn&#45;&#45;without-border" data-page="3">3</a></li>-->
 <!--        </ul>-->
-
       </div>
-
-
       <!-- SLIDE 2 -->
       <div class="help--slides" data-id="2">
         <p>
@@ -112,20 +100,16 @@
           quos suscipit corporis!
         </p>
         <ul class="help--slides-items">
-
-          {% for i in foundation_2 %}
+{% for i in foundation_2 %}
           <li>
             <div class="col">
               <div class="title">Fundacja “{{ i.name }}”</div>
               <div class="subtitle">Cel i misja: {{ i.description }}.</div>
             </div>
-
-            <div class="col"><div class="text"> categories </div></div>
+          <div class="col"><div class="text"> categories </div></div>
           </li>
-          {% endfor %}
-
+{% endfor %}
         </ul>
-
         <!-- Pagination
         <ul class="help--slides-pagination">
           <li><a href="#" class="btn btn--small btn--without-border active" data-page="1">1</a></li>
@@ -136,23 +120,20 @@
         </ul>
         -->
       </div>
-
       <!-- SLIDE 3 -->
       <div class="help--slides" data-id="3">
         <p>Lorem ipsum dolor sit amet, his ocurreret persequeris ea, ad utinam laudem duo. Verterem adipisci partiendo eos ne, ea his reque quaeque recteque, ne quo lobortis intellegam.</p>
         <ul class="help--slides-items">
-
-          {% for i in foundation_3 %}
+{% for i in foundation_3 %}
           <li>
             <div class="col">
               <div class="title">Fundacja “{{ i.name }}”</div>
               <div class="subtitle">Cel i misja: {{ i.description }}.</div>
             </div>
-
             <div class="col"><div class="text"> categories </div></div>
           </li>
-          {% endfor %}
-
+{% endfor %}
+        </ul>
         <!-- Pagination
         <ul class="help--slides-pagination">
           <li><a href="#" class="btn btn--small btn--without-border active" data-page="1">1</a></li>
@@ -160,6 +141,5 @@
         </ul>
         -->
       </div>
-    </section>
-
+     </section>
 {% endblock %}

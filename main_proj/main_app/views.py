@@ -4,6 +4,7 @@ from django.db.models import Count, Sum
 from .models import *
 # Create your views here.
 
+
 class LandingPage(View):
     def get(self, request, *args, **kwargs):
         foundation = Institution.objects.all()
@@ -23,13 +24,16 @@ class LandingPage(View):
 
         return render(request, 'main_app/index.html', context)
 
+
 class AddDonation(View):
     def get(self, request):
         return render(request, 'main_app/form.html')
 
+
 class Login(View):
     def get(self, request):
         return render(request, 'main_app/login.html')
+
 
 class Register(View):
     def get(self, request):
