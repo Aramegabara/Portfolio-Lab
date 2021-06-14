@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.db.models import Count, Sum
+from django.core.paginator import Paginator
+
 from .models import *
+
 # Create your views here.
 
 
@@ -13,13 +16,20 @@ class LandingPage(View):
             total=Sum('quantity'),
             institution=Count('pk')
         ),
+        # test
+        foundation_1 = foundation.filter(type='foundation')
+        foundation_2 = foundation.filter(type='organization')
+        foundation_3 = foundation.filter(type='local_donation')
+        foundation = [foundation_1, foundation_2, foundation_3]
+        p = Paginator(foundation, 1)
+        page_content = p.page(1)
         context = {
+            'foundation': foundation,
+            'page_content' : page_content,
             'category': category,
             'total': bags[0]['total'],
             'institution': bags[0]['institution'],
-            'foundation_1': foundation.filter(type='foundation'),
-            'foundation_2': foundation.filter(type='organization'),
-            'foundation_3': foundation.filter(type='local_donation'),
+
         }
 
         return render(request, 'main_app/index.html', context)
