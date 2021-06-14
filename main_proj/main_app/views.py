@@ -7,11 +7,13 @@ from .models import *
 class LandingPage(View):
     def get(self, request, *args, **kwargs):
         foundation = Institution.objects.all()
+        category = Category.objects.all()
         bags = Donation.objects.aggregate(
             total=Sum('quantity'),
             institution=Count('pk')
         ),
         context = {
+            'category': category,
             'total': bags[0]['total'],
             'institution': bags[0]['institution'],
             'foundation_1': foundation.filter(type='foundation'),
