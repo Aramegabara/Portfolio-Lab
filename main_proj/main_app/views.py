@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.views.generic import View, ListView
 from django.db.models import Count, Sum
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.contrib.auth  import authenticate, login, logout
 
-from .forms import myCreateForm
+from .forms import myCreateForm, myLoginForm
 from .models import *
 
 
@@ -46,7 +49,18 @@ class AddDonation(View):
 class Login(View):
 
     def get(self, request):
-        return render(request, 'main_app/login.html')
+        form = myLoginForm(request.POST or None)
+        return render(request, 'main_app/login.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = myLoginForm(request.POST or None)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password1 = form.cleaned_data['password1']
+            user = authenticate(email=email, password1=password1)
+            if user:
+                login(request, user)
+        return HttpResponseRedirect('/')
 
 
 class Register(View):
@@ -59,9 +73,12 @@ class Register(View):
         form = myCreateForm(request.POST)
         if form.is_valid():
             form.save()
+            user = form.cleaned_data.get('first_name')
+            messages.success(request, 'Uzytkownik storzony' + user)
             return redirect('/login')
         else:
-            error = "Twoje hasło jest niepoprawne"
-            return(request, 'main_app/regist.html', {'form': myCreateForm, 'error': error})
+            errors = "Twoje hasło jest niepoprawne"
+            # errors = [error_integ, error_val]
+            return(request, 'main_app/regist.html', {'form': myCreateForm, 'errors': errors})
 
 

@@ -4,7 +4,6 @@ from .views import (
     AddDonation,
     Login,
     Register,
-
     )
 
 urlpatterns = [

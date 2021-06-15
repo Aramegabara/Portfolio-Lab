@@ -1,7 +1,36 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth  import authenticate
+from django.contrib.auth import get_user_model
 
-from .models import User
+User = get_user_model()
+# from .models import User
+
+
+
+class myLoginForm(forms.Form):
+    email = forms.CharField(max_length=20, widget=forms.EmailInput(attrs={'placeholder': "Email"}))
+    password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'placeholder': "Hasło ss"}))
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['email'].label = 'Email 2'
+        # self.fields['password1'].label = 'Hasło 2'
+
+    def clean(self):
+        email = self.cleaned_data['email']
+        password1 = self.cleaned_data['password1']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError(f'User {email} is empty in system.')
+        user = User.objects.filter(email=email).first()
+        if user:
+            if not user.check_password1(password1):
+                raise forms.ValidationError('Incorrect password1.')
+        return self.cleaned_data
+
+    class Meta:
+        model = User
+        fields = ['email', 'password1']
 
 
 class myCreateForm(UserCreationForm):
@@ -11,7 +40,7 @@ class myCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = [ 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': "Imię"}),
             'last_name': forms.TextInput(attrs={'placeholder': "Nazwisko"}),

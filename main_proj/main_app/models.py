@@ -1,9 +1,12 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
+# from django.contrib.auth import get_user_model
+#
+# User = get_user_model()
+from .forms import User
 
-User = get_user_model()
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Category')
