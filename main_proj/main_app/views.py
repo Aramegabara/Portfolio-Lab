@@ -25,6 +25,9 @@ class LandingPage(View):
         p = Paginator(foundation, 1)
         page_num = request.GET.get('page', 1)
         page = p.page(page_num)
+        if bags[0]['total'] is None:
+            bags[0]['total'] = 0
+
         context = {
             'page': page,
             'foundation': foundation,
@@ -54,13 +57,16 @@ class Login(View):
 
     def post(self, request, *args, **kwargs):
         form = myLoginForm(request.POST or None)
+        form = myCreateForm(request.POST or None)
         if form.is_valid():
             email = form.cleaned_data['email']
             password1 = form.cleaned_data['password1']
             user = authenticate(email=email, password1=password1)
             if user:
                 login(request, user)
-        return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/')
+        form = myCreateForm(request.POST or None)
+        return render(request, 'main_app/register.html', {'form': form})
 
 
 class Register(View):
@@ -78,7 +84,6 @@ class Register(View):
             return redirect('/login')
         else:
             errors = "Twoje hasło jest niepoprawne"
-            # errors = [error_integ, error_val]
             return(request, 'main_app/regist.html', {'form': myCreateForm, 'errors': errors})
 
 
