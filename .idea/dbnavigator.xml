@@ -26,8 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d">
-        <schema name="pg_catalog" object-types="function" />
-        <schema name="public" object-types="table, view, sequence, function, constraint, index, column, dataset trigger" />
+        <schema name="public" object-types="table, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -37,12 +36,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" object-ref="schemas/public/tables/main_app_donation" />
-      <object connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" object-ref="schemas/public/tables/main_app_institution_categories" />
-      <object connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" object-ref="schemas/public/tables/main_app_institution" />
-      <object connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" object-ref="schemas/public/tables/main_app_category" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" />
@@ -52,6 +46,7 @@
     <filter-actions connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" dataset="public.main_app_institution" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" dataset="public.main_app_category" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" dataset="public.main_app_institution_categories" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="758b28e2-0f1b-4a94-82b8-37a5d0a9a32d" dataset="public.auth_user" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers>
