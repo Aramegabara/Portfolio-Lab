@@ -1,10 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth  import authenticate
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-# from .models import User
 
 
 
@@ -14,8 +12,6 @@ class myLoginForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['email'].label = 'Email 2'
-        # self.fields['password1'].label = 'Hasło 2'
 
     def clean(self):
         email = self.cleaned_data['email']
@@ -40,13 +36,12 @@ class myCreateForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
         widgets = {
             'first_name': forms.TextInput(attrs={'placeholder': "Imię"}),
             'last_name': forms.TextInput(attrs={'placeholder': "Nazwisko"}),
-            # 'email': forms.EmailInput(attrs={'placeholder': "Email"}),
         }
-
+# qawsedrfZ123
     def save(self, commit=True):
         user = super(myCreateForm, self).save(commit=False)
         user.username = user.email
