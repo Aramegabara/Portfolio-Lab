@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from users.models import CustomUser
 
+CustomUser = CustomUser
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Category')
@@ -35,7 +36,7 @@ class Donation(models.Model):
     city = models.CharField(max_length=100, verbose_name='City')
     zip_code = models.CharField( max_length=10, default="45-000", verbose_name='Zip code')
     pick_up_date = models.DateField(verbose_name='Date pick up', default=timezone.now)
-    pick_up_time = models.DateTimeField(auto_now=True, verbose_name='Time pick up')
+    pick_up_time = models.DateTimeField(auto_now=False, verbose_name='Time pick up')
     pick_up_comment = models.TextField(verbose_name='Comment', null=True, blank=True)
     user = models.ForeignKey(CustomUser, null=True, verbose_name='User', on_delete=models.CASCADE)
 
