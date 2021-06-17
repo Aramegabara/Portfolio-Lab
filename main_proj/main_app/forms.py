@@ -1,50 +1,61 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
 
 
-class myLoginForm(forms.Form):
-    email = forms.CharField(max_length=20, widget=forms.EmailInput(attrs={'placeholder': "Email"}))
-    password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'placeholder': "Hasło ss"}))
+class myLoginForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Hasło"}))
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
     def clean(self):
         email = self.cleaned_data['email']
-        password1 = self.cleaned_data['password1']
+        password = self.cleaned_data['password']
         if not User.objects.filter(email=email).exists():
-            raise forms.ValidationError(f'User {email} is empty in system.')
+            raise forms.ValidationError(f'Nie udało się znaleźć konta z emailem {email}.')
         user = User.objects.filter(email=email).first()
         if user:
-            if not user.check_password1(password1):
-                raise forms.ValidationError('Incorrect password1.')
+            if not user.check_password(password):
+                raise forms.ValidationError('Niepoprawne hasło')
         return self.cleaned_data
 
     class Meta:
         model = User
-        fields = ['email', 'password1']
+        fields = ['email', 'password']
+        widgets = {
+            'email': forms.EmailInput(attrs={'placeholder': "Email"})
+        }
 
 
-class myCreateForm(UserCreationForm):
-    password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'placeholder': "Hasło"}))
-    password2 = forms.CharField(max_length=16, widget=forms.PasswordInput(attrs={'placeholder': "Powtórz hasło"}))
-    email = forms.CharField(max_length=20, widget=forms.EmailInput(attrs={'placeholder': "Email"}))
+class myCreateForm(forms.ModelForm):
+
+    confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Powtórz hasło"}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Hasło"}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Imię"}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Nazwisko"}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'placeholder': "Email"}))
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        domain = email.split('@')[-1]
+        if domain is None:
+            raise forms.ValidationError("Niekorectny adress")
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError(f'Uzytkownik istnieje')
+        return email
+
+    def clean(self):
+        password = self.cleaned_data['password']
+        confirm_password = self.cleaned_data['confirm_password']
+        if password != confirm_password:
+            raise forms.ValidationError('Rozne hasło')
+        return self.cleaned_data
 
     class Meta:
+
         model = User
-        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
-        widgets = {
-            'first_name': forms.TextInput(attrs={'placeholder': "Imię"}),
-            'last_name': forms.TextInput(attrs={'placeholder': "Nazwisko"}),
-        }
-# qawsedrfZ123
-    def save(self, commit=True):
-        user = super(myCreateForm, self).save(commit=False)
-        user.username = user.email
-        if commit:
-            user.save()
-        return user
+        fields = ['email', 'password', 'confirm_password', 'first_name', 'last_name']
+
