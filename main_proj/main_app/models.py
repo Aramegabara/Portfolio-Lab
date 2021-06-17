@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
-
-from .forms import User
-
+from users.models import CustomUser
 
 
 class Category(models.Model):
@@ -39,5 +37,5 @@ class Donation(models.Model):
     pick_up_date = models.DateField(verbose_name='Date pick up', default=timezone.now)
     pick_up_time = models.DateTimeField(auto_now=True, verbose_name='Time pick up')
     pick_up_comment = models.TextField(verbose_name='Comment', null=True, blank=True)
-    user = models.ForeignKey(User, null=True, verbose_name='User', on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, null=True, verbose_name='User', on_delete=models.CASCADE)
 

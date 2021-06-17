@@ -1,8 +1,6 @@
 from django import forms
-from django.contrib.auth import get_user_model
 
-User = get_user_model()
-
+from users.models import CustomUser
 
 
 class myLoginForm(forms.ModelForm):
@@ -14,16 +12,16 @@ class myLoginForm(forms.ModelForm):
     def clean(self):
         email = self.cleaned_data['email']
         password = self.cleaned_data['password']
-        if not User.objects.filter(email=email).exists():
+        if not CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError(f'Nie udało się znaleźć konta z emailem {email}.')
-        user = User.objects.filter(email=email).first()
+        user = CustomUser.objects.filter(email=email).first()
         if user:
             if not user.check_password(password):
                 raise forms.ValidationError('Niepoprawne hasło')
         return self.cleaned_data
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['email', 'password']
         widgets = {
             'email': forms.EmailInput(attrs={'placeholder': "Email"})
@@ -43,7 +41,7 @@ class myCreateForm(forms.ModelForm):
         domain = email.split('@')[-1]
         if domain is None:
             raise forms.ValidationError("Niekorectny adress")
-        if User.objects.filter(email=email).exists():
+        if CustomUser.objects.filter(email=email).exists():
             raise forms.ValidationError(f'Uzytkownik istnieje')
         return email
 
@@ -56,6 +54,6 @@ class myCreateForm(forms.ModelForm):
 
     class Meta:
 
-        model = User
+        model = CustomUser
         fields = ['email', 'password', 'confirm_password', 'first_name', 'last_name']
 
