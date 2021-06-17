@@ -3,7 +3,7 @@ from django.views.generic import View, ListView
 from django.db.models import Count, Sum
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.contrib import messages
+# from django.contrib import messages
 from django.contrib.auth  import authenticate, login, logout
 
 from .forms import myCreateForm, myLoginForm
@@ -27,7 +27,6 @@ class LandingPage(View):
         page = p.page(page_num)
         if bags[0]['total'] is None:
             bags[0]['total'] = 0
-
         context = {
             'page': page,
             'foundation': foundation,
@@ -51,39 +50,54 @@ class AddDonation(View):
 
 class Login(View):
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = myLoginForm(request.POST or None)
-        return render(request, 'main_app/login.html', {'form': form})
+        categories = Category.objects.all()
+        donate = 'self.donat texst'
+        context = {
+            'form': form,
+            'categories': categories,
+            'donate': donate
+        }
+        return render(request, 'main_app/login.html', context)
 
     def post(self, request, *args, **kwargs):
         form = myLoginForm(request.POST or None)
-        form = myCreateForm(request.POST or None)
         if form.is_valid():
             email = form.cleaned_data['email']
-            password1 = form.cleaned_data['password1']
-            user = authenticate(email=email, password1=password1)
+            username = email
+            password = form.cleaned_data['password']
+            user = authenticate(username=email, password=password)
             if user:
                 login(request, user)
                 return HttpResponseRedirect('/')
-        form = myCreateForm(request.POST or None)
-        return render(request, 'main_app/register.html', {'form': form})
+            else:
+                form = myCreateForm()
+                donate = 'donate,'
+
+        return render(request, 'main_app/register.html', {'form': form})#, 'donate': donate})
 
 
 class Register(View):
 
-    def get(self, request):
-        form = myCreateForm()
-        return render(request, 'main_app/register.html', {'form': form})
-
-    def post(self, request):
-        form = myCreateForm(request.POST)
+    def get(self, request, *args, **kwargs):
+        form = myCreateForm(request.POST or None)
+        context = {'form': form}
+        return render(request, 'main_app/register.html', context)
+    
+    def post(self, request, *args, **kwargs):
+        form = myCreateForm(request.POST or None)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('first_name')
-            messages.success(request, 'Uzytkownik storzony' + user)
+            new_user = form.save(commit=False)
+            new_user.email = form.cleaned_data['email']
+            new_user.username = new_user.email
+            new_user.first_name = form.cleaned_data['first_name']
+            new_user.last_name = form.cleaned_data['last_name']
+            new_user.save()
+            new_user.set_password(form.cleaned_data['password'])
+            new_user.save()
             return redirect('/login')
         else:
-            errors = "Twoje hasło jest niepoprawne"
-            return(request, 'main_app/regist.html', {'form': myCreateForm, 'errors': errors})
+            return render(request, 'main_app/register.html', {'form': form})
 
 
