@@ -13,10 +13,14 @@
     <header >
 <!-- login & menu -->
       <nav class="container container--70">
-        {% if user.is_authenticated  %}
+        {% if user.is_authenticated %}
         <ul class="nav--actions">
           <li class="logged-user">
-            Witaj {{ user.first_name }}
+            {% if user.first_name %}
+            Witaj {{ user.first_name|title }}
+            {% else %}
+            Witaj <a href src="#">ADMIN</a>
+            {% endif %}
             <ul class="dropdown">
               <li><a href="#">Profil</a></li>
               <li><a href="#">Moje zbiórki</a></li>
@@ -35,7 +39,11 @@
           <li><a href="{% url 'start' %}#steps" class="btn btn--without-border">O co chodzi?</a></li>
           <li><a href="{% url 'start' %}#about-us" class="btn btn--without-border">O nas</a></li>
           <li><a href="{% url 'start' %}#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+          {% if user.is_authenticated  %}
           <li><a href="{% url 'donat' %}" class="btn btn--without-border">Przekaż dary</a></li>
+          {% else %}
+          <li><a href="{% url 'login' %}" class="btn btn--without-border">Przekaż dary</a></li>
+          {% endif %}
           <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
       </nav>
@@ -58,8 +66,8 @@
       <div class="bottom-line">
         <span class="bottom-line--copy">Copyright &copy; 2019</span>
         <div class="bottom-line--icons">
-          <a href="#" class="btn btn--small"><img src="/images/icon-facebook.svg"/></a>
-          <a href="#" class="btn btn--small"><img src="/images/icon-instagram.svg"/></a>
+          <a href="#" class="btn btn--small"><img src="/static/images/icon-facebook.svg"/></a>
+          <a href="#" class="btn btn--small"><img src="/static/images/icon-instagram.svg"/></a>
         </div>
       </div>
     </footer>
