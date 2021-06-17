@@ -1,6 +1,5 @@
 {% extends 'main_app/base.html' %}
 {% block content %}
-  <body>
    <header class="header--main-page">
 <!--  NAV-->
 <!--LOGIN OR REGISTR & MENU WITH JS-->
@@ -32,7 +31,7 @@
 <!--STEPS-->
     <section id="steps" class="steps">
       <h2>Wystarczą 4 proste kroki</h2>
-      <div class="steps--container">
+  <div class="steps--container">
         <div class="steps--item">
           <span class="icon icon--hands"></span>
           <h3>Wybierz rzeczy</h3>
@@ -64,7 +63,7 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero optio esse quisquam illo omnis.</p>
         <img src="images/signature.svg" class="about-us--text-signature" alt="Signature" />
       </div>
-      <div class="about-us--image"><img src="images/about-us.jpg" alt="People in circle" /></div>
+      <div class="about-us--image"><img src="static/images/about-us.jpg" alt="People in circle" /></div>
     </section>
 <!--HELP-->
      <section id="help" class="help">
@@ -136,7 +135,6 @@
           <li><a href="#" class="btn btn--small btn--without-border" data-page="4">4</a></li>
           <li><a href="#" class="btn btn--small btn--without-border" data-page="5">5</a></li>
         </ul>
-
       </div>
       <!-- SLIDE 3 -->
       <div class="help--slides" data-id="3">
@@ -157,7 +155,6 @@
           <li><a href="#" class="btn btn--small btn--without-border active" data-page="1">1</a></li>
           <li><a href="#" class="btn btn--small btn--without-border" data-page="2">2</a></li>
         </ul>
-
       </div>
      </section>
 {% endblock %}
