@@ -120,7 +120,7 @@
 {% for i in foundation.1 %}
           <li>
             <div class="col">
-              <div class="title">Fundacja “{{ i.name }}”</div>
+              <div class="title">Organizacja “{{ i.name }}”</div>
               <div class="subtitle">Cel i misja: {{ i.description }}.</div>
             </div>
           <div class="col"><div class="text"> {{ i.categories.values_list.0.1 }} </div></div>
@@ -143,7 +143,7 @@
 {% for i in foundation.2 %}
           <li>
             <div class="col">
-              <div class="title">Fundacja “{{ i.name }}”</div>
+              <div class="title">Lokalna zbiórka “{{ i.name }}”</div>
               <div class="subtitle">Cel i misja: {{ i.description }}.</div>
             </div>
             <div class="col"><div class="text"> {{ i.categories.values_list.0.1 }} </div></div>
