@@ -65,9 +65,8 @@ class Login(View):
         form = myLoginForm(request.POST or None)
         if form.is_valid():
             email = form.cleaned_data['email']
-            username = email
             password = form.cleaned_data['password']
-            user = authenticate(username=email, password=password)
+            user = authenticate(email=email, password=password)
             if user:
                 login(request, user)
                 return HttpResponseRedirect('/')
@@ -90,7 +89,6 @@ class Register(View):
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.email = form.cleaned_data['email']
-            new_user.username = new_user.email
             new_user.first_name = form.cleaned_data['first_name']
             new_user.last_name = form.cleaned_data['last_name']
             new_user.save()
