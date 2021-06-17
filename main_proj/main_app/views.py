@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 # from django.contrib import messages
 from django.contrib.auth  import authenticate, login, logout
 
-from .forms import myCreateForm, myLoginForm
+from .forms import MyCreateForm, MyLoginForm, AddDonationForm
 from .models import *
 
 
@@ -39,19 +39,33 @@ class LandingPage(View):
 class LandingPageListView(ListView):
     model = LandingPage
     template_name = "main_app/index.html"
-    paginate_by = 2
+    paginate_by = 5
 
 
 class AddDonation(View):
 
-    def get(self, request):
-        return render(request, 'main_app/form.html')
+    def get(self, request, *args, **kwargs):
+        # test
+        form = AddDonationForm(request.POST or None)
+        # endtest
+        category = Category.objects.all()
+        foundation = Institution.objects.all()
+        institution = []
+        for i in foundation:
+            institution.append(i)
+
+        donations = Donation.objects.all()
+        content = {'category': category,'donations': donations, 'institution': institution}
+        return render(request, 'main_app/form.html', {'content': content, 'form': form})
+
+        class Meta:
+            category="category"
 
 
 class Login(View):
 
     def get(self, request, *args, **kwargs):
-        form = myLoginForm(request.POST or None)
+        form = MyLoginForm(request.POST or None)
         categories = Category.objects.all()
         donate = 'self.donat texst'
         context = {
@@ -62,7 +76,7 @@ class Login(View):
         return render(request, 'main_app/login.html', context)
 
     def post(self, request, *args, **kwargs):
-        form = myLoginForm(request.POST or None)
+        form = MyLoginForm(request.POST or None)
         if form.is_valid():
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
@@ -71,7 +85,7 @@ class Login(View):
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
-                form = myCreateForm()
+                form = MyCreateForm()
                 donate = 'donate,'
 
         return render(request, 'main_app/register.html', {'form': form})#, 'donate': donate})
@@ -80,12 +94,12 @@ class Login(View):
 class Register(View):
 
     def get(self, request, *args, **kwargs):
-        form = myCreateForm(request.POST or None)
-        context = {'form': form}
-        return render(request, 'main_app/register.html', context)
+        form = MyCreateForm(request.POST or None)
+        content = {'form': form}
+        return render(request, 'main_app/register.html', content)
     
     def post(self, request, *args, **kwargs):
-        form = myCreateForm(request.POST or None)
+        form = MyCreateForm(request.POST or None)
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.email = form.cleaned_data['email']
