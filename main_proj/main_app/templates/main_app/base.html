@@ -18,9 +18,6 @@
           <li class="logged-user">
             {% if user.first_name %}
             Witaj {{ user.first_name|title }}
-            {% else %}
-            Witaj <a href src="#">ADMIN</a>
-            {% endif %}
             <ul class="dropdown">
               <li><a href="#">Profil</a></li>
               <li><a href="#">Moje zbiórki</a></li>
@@ -28,6 +25,17 @@
             </ul>
           </li>
         </ul>
+            {% else %}
+            Witaj <a href src="#">ADMIN</a>
+            <ul class="dropdown">
+              <li><a href="/admin">Panel admina</a></li>
+              <li><a href="#">Moje zbiórki</a></li>
+              <li><a href="{% url 'logout' %}">Wyloguj</a></li>
+            </ul>
+          </li>
+        </ul>
+            {% endif %}
+
         {% else %}
         <ul class="nav--actions">
           <li><a href="{% url 'login' %}" class="btn btn--small btn--without-border">Zaloguj</a></li>
