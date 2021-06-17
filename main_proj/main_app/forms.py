@@ -1,9 +1,9 @@
 from django import forms
 
-from users.models import CustomUser
+from .models import CustomUser, Donation #Category
 
 
-class myLoginForm(forms.ModelForm):
+class MyLoginForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Hasło"}))
 
     def __init__(self, *args, **kwargs):
@@ -28,8 +28,7 @@ class myLoginForm(forms.ModelForm):
         }
 
 
-class myCreateForm(forms.ModelForm):
-
+class MyCreateForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Powtórz hasło"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': "Hasło"}))
     first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': "Imię"}))
@@ -56,4 +55,37 @@ class myCreateForm(forms.ModelForm):
 
         model = CustomUser
         fields = ['email', 'password', 'confirm_password', 'first_name', 'last_name']
+
+
+class AddDonationForm(forms.ModelForm):
+    quantity = forms.IntegerField(min_value=1)
+    address = forms.CharField(max_length=200)
+    city = forms.CharField(max_length=100)
+    zip_code = forms.CharField(max_length=10)
+    phone_number = forms.CharField(max_length=15)
+    pick_up_date = forms.DateField(widget=forms.DateInput(attrs={'placeholder':'mm/dd/yyyy'}), input_formats="MM/DD/YYYY")
+    pick_up_time = forms.TimeField(widget=forms.TimeInput(attrs={'placeholder':'--:-- --'}), input_formats="HH:MM AM/PM")
+    pick_up_comment = forms.Textarea()
+
+    class Meta:
+        model = Donation
+        fields = ['quantity',
+                  'address',
+                  'city',
+                  'zip_code',
+                  'phone_number',
+                  'pick_up_date',
+                  'pick_up_time',
+                  'pick_up_comment'
+                  ]
+        # test
+#     # CHOICES = []
+#     # categories = Category.objects.filter(name=)
+#     # for category in categories:
+#     #     CHOICES.append((category.id, category.name))
+#     category = forms.CharField(widget=forms.RadioSelect())#, choices=CHOICES)
+#
+#     class Meta:
+#         model = Category
+#         fields = ['category']
 
