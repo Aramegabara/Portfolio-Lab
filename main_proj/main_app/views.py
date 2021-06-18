@@ -3,7 +3,6 @@ from django.views.generic import View, ListView
 from django.db.models import Count, Sum
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-# from django.contrib import messages
 from django.contrib.auth  import authenticate, login, logout
 
 from .forms import MyCreateForm, MyLoginForm, AddDonationForm
@@ -55,7 +54,6 @@ class AddDonation(View):
         return render(request, 'main_app/form.html', {'content': content, 'form': form})
 
 
-
 class Login(View):
 
     def get(self, request, *args, **kwargs):
@@ -78,11 +76,9 @@ class Login(View):
             if user:
                 login(request, user)
                 return HttpResponseRedirect('/')
-            else:
-                form = MyCreateForm()
-                donate = 'donate,'
 
-        return render(request, 'main_app/register.html', {'form': form})#, 'donate': donate})
+        form = MyCreateForm()
+        return render(request, 'main_app/register.html', {'form': form})
 
 
 class Register(View):

@@ -63,11 +63,7 @@
           {% for i in content.category %}
             <div class="form-group form-group--checkbox">
               <label>
-<!--                <input-->
-<!--                  type="checkbox"-->
-<!--                  name="categories"-->
-<!--                  value="{{ i.id }}"-->
-<!--                />-->{{ form.categories }}
+                {{ form.categories }}
                 <span class="checkbox">{{ i.id }}</span>
                 <span class="description"
                   > {{ i.name }}</span>
@@ -88,9 +84,6 @@
           <label>
                 Liczba 60l worków:
             {{ form.quantity }}
-<!--                            <input type="number" name="bags" step="1" min="1" value="{{ form.label }}" />-->
-
-<!--                <input type="number" name="bags" step="1" min="1" value="{{ content.donations.quantity }}" />-->
           </label>
             </div>
 
@@ -121,20 +114,6 @@
               </label>
             </div>
             {% endfor %}
-
-<!--            <div class="form-group form-group&#45;&#45;checkbox">-->
-<!--              <label>-->
-<!--                <input type="radio" name="institution" value="old" />-->
-<!--                <span class="checkbox radio"></span>-->
-<!--                <span class="description">-->
-<!--                  <div class="title">Fundacja “Dla dzieci"</div>-->
-<!--                  <div class="subtitle">-->
-<!--                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji-->
-<!--                    życiowej.-->
-<!--                  </div>-->
-<!--                </span>-->
-<!--              </label>-->
-<!--            </div>-->
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>

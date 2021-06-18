@@ -80,14 +80,4 @@ class AddDonationForm(forms.ModelForm):
                   'pick_up_time',
                   'pick_up_comment'
                   ]
-        # test
-#     # CHOICES = []
-#     # categories = Category.objects.filter(name=)
-#     # for category in categories:
-#     #     CHOICES.append((category.id, category.name))
-#     category = forms.CharField(widget=forms.RadioSelect())#, choices=CHOICES)
-#
-#     class Meta:
-#         model = Category
-#         fields = ['category']
 
