@@ -63,12 +63,12 @@
           {% for i in content.category %}
             <div class="form-group form-group--checkbox">
               <label>
-                <input
-                  type="checkbox"
-                  name="categories"
-                  value="{{ i.id }}"
-                />
-                <span class="checkbox"></span>
+<!--                <input-->
+<!--                  type="checkbox"-->
+<!--                  name="categories"-->
+<!--                  value="{{ i.id }}"-->
+<!--                />-->{{ form.categories }}
+                <span class="checkbox">{{ i.id }}</span>
                 <span class="description"
                   > {{ i.name }}</span>
               </label>
@@ -110,10 +110,10 @@
             {% for i in content.institution %}
             <div class="form-group form-group--checkbox">
               <label>
-                <input type="radio" name="institution" value="{{ i.id }}" />
-                <span class="checkbox radio"></span>
+<!--                {{ form.categories }}-->
+                <span class="checkbox radio">{{i.categories.values_list.0.0}}</span>
                 <span class="description">
-                  <div class="title">Fundacja “{{ i.name }}”</div>
+                  <div class="title">{{i.type|title }} “{{ i.name }}”</div>
                   <div class="subtitle">
                     Cel i misja: {{ i.description }}
                   </div>
@@ -122,19 +122,19 @@
             </div>
             {% endfor %}
 
-            <div class="form-group form-group--checkbox">
-              <label>
-                <input type="radio" name="institution" value="old" />
-                <span class="checkbox radio"></span>
-                <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-              </label>
-            </div>
+<!--            <div class="form-group form-group&#45;&#45;checkbox">-->
+<!--              <label>-->
+<!--                <input type="radio" name="institution" value="old" />-->
+<!--                <span class="checkbox radio"></span>-->
+<!--                <span class="description">-->
+<!--                  <div class="title">Fundacja “Dla dzieci"</div>-->
+<!--                  <div class="subtitle">-->
+<!--                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji-->
+<!--                    życiowej.-->
+<!--                  </div>-->
+<!--                </span>-->
+<!--              </label>-->
+<!--            </div>-->
 
             <div class="form-group form-group--buttons">
               <button type="button" class="btn prev-step">Wstecz</button>

@@ -45,21 +45,15 @@ class LandingPageListView(ListView):
 class AddDonation(View):
 
     def get(self, request, *args, **kwargs):
-        # test
         form = AddDonationForm(request.POST or None)
-        # endtest
         category = Category.objects.all()
         foundation = Institution.objects.all()
         institution = []
         for i in foundation:
             institution.append(i)
-
-        donations = Donation.objects.all()
-        content = {'category': category,'donations': donations, 'institution': institution}
+        content = {'category': category, 'institution': institution}
         return render(request, 'main_app/form.html', {'content': content, 'form': form})
 
-        class Meta:
-            category="category"
 
 
 class Login(View):

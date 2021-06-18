@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import CustomUser, Donation #Category
+from .models import CustomUser, Donation , Category
 
 
 class MyLoginForm(forms.ModelForm):
@@ -58,6 +58,7 @@ class MyCreateForm(forms.ModelForm):
 
 
 class AddDonationForm(forms.ModelForm):
+    categories = forms.IntegerField(widget=forms.HiddenInput())
     quantity = forms.IntegerField(min_value=1)
     address = forms.CharField(max_length=200)
     city = forms.CharField(max_length=100)
@@ -69,7 +70,8 @@ class AddDonationForm(forms.ModelForm):
 
     class Meta:
         model = Donation
-        fields = ['quantity',
+        fields = ['categories',
+                  'quantity',
                   'address',
                   'city',
                   'zip_code',

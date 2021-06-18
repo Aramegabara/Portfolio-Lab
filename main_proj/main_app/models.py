@@ -8,9 +8,9 @@ class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name='Category')
 
 class Institution(models.Model):
-    V1 = 'foundation'
-    V2 = 'organization'
-    V3 = 'local_donation'
+    V1 = 'fundacja'
+    V2 = 'organizacja'
+    V3 = 'zbiórka lokalna'
 
     TYPE_INSTITUTION = (
         (V1, 'fundacja'),
