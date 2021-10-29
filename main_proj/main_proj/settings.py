@@ -121,7 +121,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
 # local DB
 '''try:
     from main_proj.local_settings import DATABASES
